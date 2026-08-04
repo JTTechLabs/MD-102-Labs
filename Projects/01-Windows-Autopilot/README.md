@@ -35,86 +35,135 @@ The deployment covers:
 
 ## 1. Region Selection
 
-The Windows 11 Out-of-Box Experience begins.
+The Windows 11 Out-of-Box Experience (OOBE) begins with the initial region selection before any device provisioning occurs.
 
 ![](Images/01-OOBE-Region.png)
 
 ---
 
-## 2. Launch PowerShell
+## 2. Launch Command Prompt
 
-PowerShell was opened during OOBE to collect the hardware hash.
+Command Prompt was opened during OOBE using **Shift + F10** to begin collecting the Windows Autopilot hardware hash.
+
+![](Images/02-CMD.png)
+
+---
+
+## 3. Launch PowerShell
+
+PowerShell was launched from Command Prompt to install and execute the Windows Autopilot deployment script.
 
 ![](Images/03-Powershell.png)
 
 ---
 
-## 3. Upload Hardware Hash
+## 4. Upload Hardware Hash
 
-The device hardware hash was uploaded directly into Microsoft Intune using the Online method.
+The device hardware hash was uploaded directly to Microsoft Intune using the **Get-WindowsAutopilotInfo.ps1 -Online** method.
 
 ![](Images/04-Autopilot-OnlineUpload-Success.png)
 
 ---
 
-## 4. Device Imported
+## 5. Device Imported into Windows Autopilot
 
-The device successfully appeared within Windows Autopilot Devices.
+After a successful upload, the device appeared in the Windows Autopilot Devices list.
 
 ![](Images/05-Autopilot-DeviceImported.png)
 
 ---
 
-## 5. Autopilot Profile Assigned
+## 6. Deployment Profile Assigned
 
-The deployment profile was automatically assigned.
+The Windows Autopilot deployment profile was automatically assigned to the imported device.
 
 ![](Images/06-Autopilot-ProfileAssigned.png)
 
 ---
 
-## 6. Organization Sign-In
+## 7. Organization Sign-in
 
-Windows recognized the device as an organizational Autopilot deployment.
+After rebooting, Windows recognized the device as an Autopilot-managed device and presented the organizational sign-in screen.
 
 ![](Images/07-OOBE-OrganizationSignIn.png)
 
 ---
 
-## 7. User Authentication
+## 8. User Authentication
 
-Signed in using the Microsoft Intune licensed user account.
+The assigned Microsoft Intune user authenticated to begin device enrollment.
 
 ![](Images/08-UserSignIn.png)
 
 ---
 
-## 8. Device Preparation
+## 9. Device Preparation
 
-Autopilot began preparing the device for deployment.
+Windows Autopilot started preparing the device by applying enrollment settings and provisioning policies.
 
 ![](Images/09-Preparing-Your-Device.png)
 
 ---
 
-## 9. Enrollment Status Page
+## 10. Enrollment Status Page (ESP)
 
-The Enrollment Status Page started processing required policies and applications.
+The Enrollment Status Page (ESP) initialized and began configuring the device before allowing user access.
 
 ![](Images/10-ESP-Started.png)
+
+The device preparation phase completed successfully and continued through the required deployment tasks.
 
 ![](Images/11-ESP-DevicePreparation.png)
 
 ---
 
-## Skills Demonstrated
+## Deployment Results
 
-- Microsoft Intune
+The deployment successfully completed with the following outcomes:
+
+- Windows Autopilot profile assigned
+- Microsoft Entra ID join completed
+- Microsoft Intune enrollment successful
+- Enrollment Status Page completed
+- Windows Hello configured
+- Required Win32 applications installed
+- Device successfully managed by Microsoft Intune
+
+---
+
+# Troubleshooting
+
+During development of this lab, several real-world issues were encountered and resolved.
+
+### Online Hardware Hash Upload
+
+The initial online upload returned a **401 Unauthorized** error when attempting to authenticate with a standard licensed user account.
+
+The issue was resolved by authenticating with the Global Administrator account, allowing the hardware hash to upload successfully to Microsoft Intune.
+
+### Virtual Machine Testing
+
+Multiple deployment cycles were performed to validate the Windows Autopilot process, including:
+
+- Re-registering the device with Windows Autopilot
+- Removing and re-importing the hardware hash
+- Verifying deployment profile assignment
+- Testing Enrollment Status Page (ESP) behavior
+- Validating Microsoft Intune enrollment
+- Confirming Win32 application deployment
+
+---
+
+# Skills Demonstrated
+
+- Microsoft Intune Administration
 - Windows Autopilot
 - Microsoft Entra ID
 - Windows Hello for Business
-- Enrollment Status Page
-- Win32 App Deployment
-- Endpoint Management
+- Enrollment Status Page (ESP)
+- Win32 Application Deployment
 - Device Enrollment
-- Troubleshooting
+- Endpoint Management
+- Microsoft Graph PowerShell
+- Windows OOBE Customization
+- Technical Troubleshooting
