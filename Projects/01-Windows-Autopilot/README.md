@@ -1,8 +1,20 @@
 # Windows Autopilot Deployment
 
-## Objective
+## Overview
 
-Configure and deploy Windows Autopilot in Microsoft Intune to automatically provision a Windows 11 device during the Out-of-Box Experience (OOBE).
+This project demonstrates a complete Windows Autopilot deployment using Microsoft Intune within a Microsoft 365 Developer tenant.
+
+The deployment covers:
+
+- Windows Autopilot registration
+- Online hardware hash upload
+- Autopilot profile assignment
+- Out-of-Box Experience (OOBE)
+- Enrollment Status Page (ESP)
+- Windows Hello for Business
+- Microsoft Intune enrollment
+- Win32 application deployment
+- Deployment validation
 
 ---
 
@@ -14,58 +26,95 @@ Configure and deploy Windows Autopilot in Microsoft Intune to automatically prov
 | Host OS | Ubuntu Linux |
 | Guest OS | Windows 11 |
 | Identity | Microsoft Entra ID |
-| Device Management | Microsoft Intune |
-| Licensing | Microsoft 365 Developer Tenant |
+| MDM | Microsoft Intune |
+| Deployment | Windows Autopilot |
 
 ---
 
-## Technologies Used
+# Deployment Walkthrough
+
+## 1. Region Selection
+
+The Windows 11 Out-of-Box Experience begins.
+
+![](Images/01-OOBE-Region.png)
+
+---
+
+## 2. Launch PowerShell
+
+PowerShell was opened during OOBE to collect the hardware hash.
+
+![](Images/03-Powershell.png)
+
+---
+
+## 3. Upload Hardware Hash
+
+The device hardware hash was uploaded directly into Microsoft Intune using the Online method.
+
+![](Images/04-Autopilot-OnlineUpload-Success.png)
+
+---
+
+## 4. Device Imported
+
+The device successfully appeared within Windows Autopilot Devices.
+
+![](Images/05-Autopilot-DeviceImported.png)
+
+---
+
+## 5. Autopilot Profile Assigned
+
+The deployment profile was automatically assigned.
+
+![](Images/06-Autopilot-ProfileAssigned.png)
+
+---
+
+## 6. Organization Sign-In
+
+Windows recognized the device as an organizational Autopilot deployment.
+
+![](Images/07-OOBE-OrganizationSignIn.png)
+
+---
+
+## 7. User Authentication
+
+Signed in using the Microsoft Intune licensed user account.
+
+![](Images/08-UserSignIn.png)
+
+---
+
+## 8. Device Preparation
+
+Autopilot began preparing the device for deployment.
+
+![](Images/09-Preparing-Your-Device.png)
+
+---
+
+## 9. Enrollment Status Page
+
+The Enrollment Status Page started processing required policies and applications.
+
+![](Images/10-ESP-Started.png)
+
+![](Images/11-ESP-DevicePreparation.png)
+
+---
+
+## Skills Demonstrated
 
 - Microsoft Intune
-- Microsoft Entra ID
 - Windows Autopilot
-- Windows 11
-- Oracle VirtualBox
-- Microsoft 365 Developer Tenant
-
----
-
-## Steps Performed
-
-1. Created an Autopilot device group.
-2. Captured the Windows hardware hash using PowerShell.
-3. Imported the hardware hash into Windows Autopilot.
-4. Verified successful device import.
-5. Created a Windows Autopilot deployment profile.
-6. Assigned the deployment profile to the Autopilot device group.
-7. Waited for the deployment profile to assign successfully.
-8. Rebooted the virtual machine into OOBE.
-9. Signed in with the lab user account.
-10. Verified successful Autopilot enrollment.
-
----
-
-## Validation
-
-The deployment was verified by confirming:
-
-- Device successfully joined Microsoft Entra ID
-- Device enrolled into Microsoft Intune
-- Windows Autopilot profile applied successfully
-- Device appeared in Intune Devices
-- Device received assigned deployment profile
-
----
-
-## Lessons Learned
-
-- Learned how Windows Autopilot hardware hashes are imported.
-- Learned how deployment profiles are assigned.
-- Learned how Intune provisions devices during OOBE.
-- Learned how device group assignments affect Autopilot deployments.
-
----
-
-## Screenshots
-
-Screenshots will be added throughout this project.
+- Microsoft Entra ID
+- Windows Hello for Business
+- Enrollment Status Page
+- Win32 App Deployment
+- Endpoint Management
+- Device Enrollment
+- Troubleshooting
